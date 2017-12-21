@@ -68,12 +68,14 @@ var draw = (function(){
   //Draws a rectangle
     drawRect: function() {
       ctx.fillStyle = this.randColor();
+      ctx.strokeStyle = this.randColor();
       ctx.fillRect(x1,y1,(x2-x1),(y2-y1));
+      ctx.strokeRect(x1,y1,(x2-x1),(y2-y1));
     },
 
   //Draws a line
     drawLine: function() {
-      ctx.fillStroke = this.randColor();
+    ctx.strokeStyle = this.randColor();
     ctx.beginPath();
     ctx.moveTo(x1,y1);
     ctx.lineTo(x2,y2);
@@ -84,12 +86,14 @@ var draw = (function(){
     //Draws a circle using multiple triangles and pathagrem therom
       drawCircle: function() {
         console.log('I\'m drawing a circle');
-        ctx.fillStroke = this.randColor();
+        ctx.fillStyle = this.randColor();
+        ctx.strokeStyle = this.randColor();
         let a = (x1-x2);
         let b = (y1-y2);
         let radius = Math.sqrt(a*a+b*b);
         ctx.beginPath();
         ctx.arc(x1, y1, radius, 0, 2 * Math.PI);
+        ctx.fill();
         ctx.stroke();
     },
 
