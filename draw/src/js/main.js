@@ -33,6 +33,7 @@ var draw = (function(){
     //Sets the shape to the drawing
     setShape(shp){
       shape = shp;
+      console.log(shape);
     },
 
       //Set the x,y coords
@@ -60,10 +61,22 @@ var draw = (function(){
 
 
   //Draws a rectangle
-    drawRect: function(x,y,h,w) {
+    drawRect: function() {
       ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
       ctx.fillRect(x1,y1,(x2-x1),(y2-y1));
     },
+
+  //Draws a line
+    drawLine: function() {
+      ctx.fillStroke = '#'+Math.floor(Math.random()*16777215).toString(16);
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);
+    ctx.lineTo(x2,y2);
+    ctx.stroke();
+  },
+
+
+
 //Returns the canvas object
     getCanvas: function(){
       return canvas;
@@ -71,12 +84,16 @@ var draw = (function(){
 
     //Draws a selected setShape
     draw: function() {
+      console.log(shape);
       ctx.restore();
       if(shape==='rectangle'){
         this.drawRect();
+      }else if(shape==='line'){
+        this.drawLine();
       }else{
         alert('Please choose a shape');
       }
+      console.log(shape);
       ctx.save();
     },
 
@@ -94,26 +111,29 @@ var draw = (function(){
 draw.init();
 
 //Chose to draw a rectangle
-document.getElementById('btnRect').addEventListener('click', function(evt) {
+document.getElementById('btnRect').addEventListener('click', function() {
   draw.setShape('rectangle');
-}, false);
+}, );
+
+//Chose to draw a line
+document.getElementById('btnLine').addEventListener('click', function() {
+  draw.setShape('line');
+}, );
 
 //Track  x,y position
 draw.getCanvas().addEventListener('mousemove', function(evt) {
   draw.setXY(evt);
   draw.writeXY();
-}, false);
+}, );
 
 
 //Set the starting  x,y position
 draw.getCanvas().addEventListener('mousedown', function() {
   draw.setStart();
-}, false);
+}, );
 
 //Set the ending  x,y position
 draw.getCanvas().addEventListener('mouseup', function() {
   draw.setEnd();
-  draw.drawRect();
-}, false);
-
-draw.draw();
+  draw.draw();
+}, );
