@@ -134,6 +134,29 @@ var draw = (function(){
 
     },
 
+    //Draws a triangle
+      drawTriangle: function() {
+        console.log('I\'m drawing a triangle');
+        ctx.fillStyle = '#FF0000';
+        ctx.strokeStyle = document.getElementById('strokeColor').value;
+
+        ctx.beginPath();
+        ctx.moveTo(x1,y1);
+        ctx.lineTo(x2,y2);
+
+        ctx.moveTo(x1,y1);
+        ctx.lineTo(50,50);
+
+        ctx.moveTo(x2,y2);
+        ctx.lineTo(50,50);
+
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.closePath();
+
+      },
+
 //Returns the canvas object
     getCanvas: function(){
       return canvas;
@@ -151,6 +174,8 @@ var draw = (function(){
         this.drawCircle();
       }else if(shape==='path'){
         this.drawPath();
+      }else if(shape==='triangle'){
+        this.drawTriangle();
       }else{
         alert('Please choose a shape');
       }
@@ -170,6 +195,7 @@ var draw = (function(){
 })();
 
 draw.init();
+
 
 //Chose to draw a rectangle
 document.getElementById('btnRect').addEventListener('click', function() {
@@ -191,6 +217,22 @@ document.getElementById('btnCircle').addEventListener('click', function() {
 document.getElementById('btnPath').addEventListener('click', function() {
   draw.setShape('path');
 }, );
+
+//Chose to draw a triangle
+document.getElementById('btnTriangle').addEventListener('click', function() {
+  draw.setShape('triangle');
+}, );
+
+//Chose a stroke color
+document.getElementById('btnStroke').addEventListener('click', function() {
+  draw.setShape('triangle');
+}, );
+
+//Chose a fill color
+document.getElementById('btnFill').addEventListener('click', function() {
+      document.getElementById('strokeColor').blue;
+}, );
+
 
 //Track  x,y position
 draw.getCanvas().addEventListener('mousemove', function(evt) {
