@@ -30,6 +30,11 @@ var draw = (function(){
 
   return{
 
+    //return a random color
+    randColor: function() {
+      return  '#'+Math.floor(Math.random()*16777215).toString(16);
+    },
+
     //Sets the shape to the drawing
     setShape(shp){
       shape = shp;
@@ -62,13 +67,13 @@ var draw = (function(){
 
   //Draws a rectangle
     drawRect: function() {
-      ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+      ctx.fillStyle = this.randColor();
       ctx.fillRect(x1,y1,(x2-x1),(y2-y1));
     },
 
   //Draws a line
     drawLine: function() {
-      ctx.fillStroke = '#'+Math.floor(Math.random()*16777215).toString(16);
+      ctx.fillStroke = this.randColor();
     ctx.beginPath();
     ctx.moveTo(x1,y1);
     ctx.lineTo(x2,y2);
@@ -76,6 +81,17 @@ var draw = (function(){
   },
 
 
+    //Draws a circle using multiple triangles and pathagrem therom
+      drawCircle: function() {
+        console.log('I\'m drawing a circle');
+        ctx.fillStroke = this.randColor();
+        let a = (x1-x2);
+        let b = (y1-y2);
+        let radius = Math.sqrt(a*a+b*b);
+        ctx.beginPath();
+        ctx.arc(x1, y1, radius, 0, 2 * Math.PI);
+        ctx.stroke();
+    },
 
 //Returns the canvas object
     getCanvas: function(){
@@ -90,6 +106,8 @@ var draw = (function(){
         this.drawRect();
       }else if(shape==='line'){
         this.drawLine();
+      }else if(shape==='circle'){
+        this.drawCircle();
       }else{
         alert('Please choose a shape');
       }
@@ -118,6 +136,12 @@ document.getElementById('btnRect').addEventListener('click', function() {
 //Chose to draw a line
 document.getElementById('btnLine').addEventListener('click', function() {
   draw.setShape('line');
+}, );
+
+
+//Chose to draw a circle
+document.getElementById('btnCircle').addEventListener('click', function() {
+  draw.setShape('circle');
 }, );
 
 //Track  x,y position
