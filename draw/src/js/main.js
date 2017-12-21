@@ -71,11 +71,13 @@ var draw = (function(){
 
     //Draws a selected setShape
     draw: function() {
+      ctx.restore();
       if(shape==='rectangle'){
         this.drawRect();
       }else{
         alert('Please choose a shape');
       }
+      ctx.save();
     },
 
 //Create the canvas
